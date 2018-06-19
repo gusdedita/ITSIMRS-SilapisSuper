@@ -15,7 +15,7 @@
 	$jadwalsupervisi = $_GET['jadwal'];
 	$unit = $_GET['unit'];
 	
-	$idsuper = $tglsupervisi."/".$jadwalsupervisi."/".$unit;
+	$idsuper = $tglsupervisi."/".$data_user['id_user'];
 ?>
 <div class="content">
     <div class="container-fluid">
@@ -57,7 +57,7 @@
 								<div class="col-md-2">
                                     <div class="form-group">
                                         <label class="control-label">Jadwal Supervisi</label>
-										<select class="form-control js-example-responsive" id="cb_jadwalsupervisi" name="cb_jadwalsupervisi">
+										<select class="form-control js-example-responsive" id="cb_jadwalsupervisi" name="cb_jadwalsupervisi" >
 											<option value=""></option>
 											<option value="Pagi">Jadwal Pagi</option>
 											<option value="Siang">Jadwal Siang</option>
@@ -103,7 +103,6 @@
 							<input type="hidden" name="txt_unit_super" id="txt_unit_super" value="<?PHP echo $unit;?>">
 							<input type="hidden" name="txt_idsuper" id="txt_idsuper" value="<?PHP echo $idsuper;?>">
 							<input type="hidden" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_user['id_user'];?>">
-							<input type="hidden" name="txt_jenisunit" id="txt_jenisunit" value="<?PHP echo $data_jenisunit['jenis_unit'];?>">
                             
 							<?PHP 
 								if ($data_jenisunit['jenis_unit']=="Kelas") {
@@ -143,11 +142,11 @@
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Umum</label>
-												<input type="text" class="form-control" name="txt_kapasumum_i" id="txt_kapasumum_i">
+												<input type="text" class="form-control" name="txt_kapasumum_ii" id="txt_kapasumum_i">
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">JKN</label>
-												<input type="text" class="form-control" name="txt_kapasjkn_i" id="txt_kapasjkn_i">
+												<input type="text" class="form-control" name="txt_kapasjkn_ii" id="txt_kapasjkn_i">
 											</div>
 										</div>
 									</div>

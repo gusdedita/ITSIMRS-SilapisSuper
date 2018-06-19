@@ -7,6 +7,7 @@
 	
 	elseif($view == "") 								include("home.php");
 	elseif($view == "supervisi-add") 					include("supervisi-add.php");
+	elseif($view == "supervisi-data") 					include("supervisi-data.php");
 	
 	else echo"No Content";
 ?>
