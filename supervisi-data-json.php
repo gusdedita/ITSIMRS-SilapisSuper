@@ -33,12 +33,37 @@
 		$result_sel_detsuper = mysql_query($query_sel_detsuper) or die(mysql_error());
 		$result_detsuper = array();
 		while ($data_sel_detsuper = mysql_fetch_object($result_sel_detsuper)){
+			
+			if ($data_sel_detsuper->status_medis == "Belum" ){
+				$s_medis="<span class='label label-danger'>Belum</span>";
+			} else if ($data_sel_detsuper->status_medis == "Sudah" ){
+				$s_medis="<span class='label label-warning'>Sudah</span>";
+			} else if ($data_sel_detsuper->status_medis == "Tidak Ada" ){
+				$s_medis="<span class='label label-success'>Tidak Ada</span>";
+			}
+			
+			if ($data_sel_detsuper->status_pelayanan == "Belum" ){
+				$s_pelayanan="<span class='label label-danger'>Belum</span>";
+			} else if ($data_sel_detsuper->status_pelayanan == "Sudah" ){
+				$s_pelayanan="<span class='label label-warning'>Sudah</span>";
+			} else if ($data_sel_detsuper->status_pelayanan == "Tidak Ada" ){
+				$s_pelayanan="<span class='label label-success'>Tidak Ada</span>";
+			}
+			
+			if ($data_sel_detsuper->status_umum == "Belum" ){
+				$s_umum="<span class='label label-danger'>Belum</span>";
+			} else if ($data_sel_detsuper->status_umum == "Sudah" ){
+				$s_umum="<span class='label label-warning'>Sudah</span>";
+			} else if ($data_sel_detsuper->status_umum == "Tidak Ada" ){
+				$s_umum="<span class='label label-success'>Tidak Ada</span>";
+			}
+			
 			$result_detsuper[] = array(
 				'id_supervisi'		=> $data_sel_detsuper->id_supervisi,
 				'nama_unit' 		=> $data_sel_detsuper->nama_unit,
-				'status_medis'		=> $data_sel_detsuper->status_medis,
-				'status_pelayanan'	=> $data_sel_detsuper->status_pelayanan,
-				'status_umum'		=> $data_sel_detsuper->status_umum
+				'status_medis'		=> $s_medis,
+				'status_pelayanan'	=> $s_pelayanan,
+				'status_umum'		=> $s_umum
 			);
 		}
 		

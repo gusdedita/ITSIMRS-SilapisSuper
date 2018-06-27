@@ -80,10 +80,12 @@
 
 
 <!--Select 2-->
+
+<script src="assets/select2/dist/jquery-2.1.4.min.js"></script>
 <script src="assets/select2/dist/js/select2.min.js"></script>
 <script>
 	$(document).ready(function () {
-		$("#cb_unit1").select2({
+		$("#cb_unit").select2({
 			placeholder: "Nama Unit/Ruangan"
 		});	
 		
@@ -117,12 +119,34 @@
 		minLength: 1
 	  });
 	});
+	
+	
+	$(document).ready(function() {
+	  $("#txt_unit_data").autocomplete({
+		source: [
+			<?PHP
+			
+				$query_unit  = "SELECT * FROM unit WHERE status_del='N' ";
+				$result_unit = mysql_query($query_unit) or die(mysql_error());
+				while ($rows_unit = mysql_fetch_object($result_unit)) {
+					$id_unit= $rows_unit -> id_unit;
+					$unit 	= $rows_unit -> nama_unit;
+					echo '"'.$unit.'",';
+				}
+				
+			?>
+		  
+		  "-"
+		],
+		minLength: 1
+	  });
+	});
 </script>
 
 
 <!--Datatables-->
 <!--<script src="assets/js/datatables/jquery.min.js"></script>-->
-<script src="assets/js/datatables/bootstrap.min.js" type="text/javascript"></script>
+<!--<script src="assets/js/datatables/bootstrap.min.js" type="text/javascript"></script>-->
 <script src="assets/js/datatables/jquery.dataTables.min.js"></script>
 <script src="assets/js/datatables/dataTables.bootstrap.min.js"></script>
 <script>
@@ -134,19 +158,27 @@
  
 	$(document).ready(function() {
 		var table = $('#tbl_supervisi').DataTable( {
+			
 			"ajax": "supervisi-data-json.php",
 			"columns": [
 				{
-					"className":      'details-control',
-					"orderable":      false,
-					"data":           'no',
-					"defaultContent": ''
+					"className"	:	'details-control text-center',
+					"data"		:   'no',
+					"width"		: 	'10%'
 				},
-				{ "data": "tgl_supervisi" },
-				{ "data": "jadwal_supervisi" },
-				{ "data": "nama_user"}
-			],
-			"order": [[1, 'asc']]
+				{ 	
+					"className"	:	'details-control text-center',
+					"data"		: 	"tgl_supervisi" 
+				},
+				{ 	
+					"className"	:	'details-control text-center',
+					"data"		:   "jadwal_supervisi" 
+				},
+				{ 	
+					"className"	:	'details-control',
+					"data"		:   "nama_user"
+				}
+			]
 		} );
 			 
 		// Add event listener for opening and closing details

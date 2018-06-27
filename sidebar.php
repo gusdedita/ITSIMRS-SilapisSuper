@@ -20,23 +20,23 @@
                     </li>
 					
 					<li>
-                        <a href="?view=supervisi-add">
+                        <a href="?view=supervisi-data">
                             <i class="material-icons">content_paste</i>
-                            <p>Input Supervisi</p>
+                            <p>Data Supervisi</p>
                         </a>
                     </li>
 					
                     <li>
                         <a href="./user.html">
                             <i class="material-icons">person</i>
-                            <p>User Profile</p>
+                            <p>Data Pengguna</p>
                         </a>
                     </li>
                    
                     <li>
                         <a href="./typography.html">
                             <i class="material-icons">library_books</i>
-                            <p>Typography</p>
+                            <p>Data Unit/Ruang</p>
                         </a>
                     </li>
                     <li>
