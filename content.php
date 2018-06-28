@@ -9,6 +9,7 @@
 	elseif($view == "supervisi-add") 					include("supervisi-add.php");
 	elseif($view == "supervisi-data") 					include("supervisi-data.php");
 	elseif($view == "supervisi-edit") 					include("supervisi-edit.php");
+	elseif($view == "supervisi-data-masalah") 			include("supervisi-data-masalah.php");
 	
 	else echo"No Content";
 ?>

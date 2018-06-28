@@ -80,9 +80,8 @@
 
 
 <!--Select 2-->
-
-<script src="assets/select2/dist/jquery-2.1.4.min.js"></script>
-<script src="assets/select2/dist/js/select2.min.js"></script>
+<!--<script src="assets/select2/dist/jquery-2.1.4.min.js"></script>
+<script src="assets/select2/dist/js/select2.min.js"></script>-->
 <script>
 	$(document).ready(function () {
 		$("#cb_unit").select2({
@@ -150,7 +149,7 @@
 <script src="assets/js/datatables/jquery.dataTables.min.js"></script>
 <script src="assets/js/datatables/dataTables.bootstrap.min.js"></script>
 <script>
-	//$('#tbl_pasiendata').dataTable();
+	$('#tbl_spmasalah').dataTable();
 </script>
 
 <script>

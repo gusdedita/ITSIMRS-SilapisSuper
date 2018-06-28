@@ -202,7 +202,7 @@
 										
                                     <div class="form-group label-floating">
                                         <label class="control-label"> Masalah</label>
-                                        <textarea class="form-control" rows="5" name="txt_mas_medis" id="txt_mas_medis" <?PHP if ($data_super['status_medis']=="Sudah"){echo "disabled";}?>><?PHP echo $data_super['masalah_medis'];?></textarea>
+                                        <textarea class="form-control" rows="3" name="txt_mas_medis" id="txt_mas_medis" <?PHP if ($data_super['status_medis']=="Sudah"){echo "disabled";}?>><?PHP echo $data_super['masalah_medis'];?></textarea>
                                     </div>
                                 </div>
                             
@@ -219,7 +219,7 @@
 										
                                     <div class="form-group label-floating">
                                         <label class="control-label"> Masalah</label>
-                                        <textarea class="form-control" rows="5" name="txt_mas_pelayanan" id="txt_mas_pelayanan" <?PHP if ($data_super['status_pelayanan']=="Sudah"){echo "disabled";}?>><?PHP echo $data_super['masalah_pelayanan'];?></textarea>
+                                        <textarea class="form-control" rows="3" name="txt_mas_pelayanan" id="txt_mas_pelayanan" <?PHP if ($data_super['status_pelayanan']=="Sudah"){echo "disabled";}?>><?PHP echo $data_super['masalah_pelayanan'];?></textarea>
                                     </div>
                                 </div>
                           
@@ -236,13 +236,78 @@
 									
                                     <div class="form-group label-floating">
                                         <label class="control-label"> Masalah</label>
-                                        <textarea class="form-control" rows="5" name="txt_mas_umum" id="txt_mas_umum" <?PHP if ($data_super['status_umum']=="Sudah"){echo "disabled";}?>><?PHP echo $data_super['masalah_umum'];?></textarea>
+                                        <textarea class="form-control" rows="3" name="txt_mas_umum" id="txt_mas_umum" <?PHP if ($data_super['status_umum']=="Sudah"){echo "disabled";}?>><?PHP echo $data_super['masalah_umum'];?></textarea>
                                     </div>
                                 </div>
                             </div>
 							
+							<div class="row">
+							
+								<div class="col-md-4">
+									<div class="form-group label-floating">
+										<?PHP if ($data_super['status_medis']=="Belum"){?>
+											<label class="control-label"> Tanggapan</label>
+											<span class='label label-danger'>Belum</span>
+										<?PHP } else if ($data_super['status_medis']=="Sudah"){?>
+											<?PHP
+												$id_umedis = $data_super['user_medis'];
+												$qu_user_medis = mysql_query ("SELECT nama_user FROM user WHERE id_user='$id_umedis'")or die(mysql_error());
+												$data_user_medis = mysql_fetch_array($qu_user_medis);
+											?>
+											<label class="control-label"> Tanggapan (<?PHP echo $data_user_medis['nama_user'];?>)</label>
+											<textarea class="form-control" rows="3" disabled><?PHP echo $data_super['tanggapan_medis'];?></textarea>
+										<?PHP } else if ($data_super['status_medis']=="Tidak Ada"){?>
+											<label class="control-label"> Tanggapan</label>
+											<span class='label label-info'>Tidak Ada</span>
+										<?PHP } ?>
+                                    </div>
+								</div>
+								
+								<div class="col-md-4">
+									<div class="form-group label-floating">
+                                       <?PHP if ($data_super['status_pelayanan']=="Belum"){?>
+											<label class="control-label"> Tanggapan</label>
+											<span class='label label-danger'>Belum</span>
+										<?PHP } else if ($data_super['status_pelayanan']=="Sudah"){?>
+											<?PHP
+												$id_upelayanan = $data_super['user_pelayanan'];
+												$qu_user_pelayanan = mysql_query ("SELECT nama_user FROM user WHERE id_user='$id_upelayanan'")or die(mysql_error());
+												$data_user_pelayanan = mysql_fetch_array($qu_user_pelayanan);
+											?>
+											<label class="control-label"> Tanggapan (<?PHP echo $data_user_pelayanan['nama_user'];?>)</label>
+											<textarea class="form-control" rows="3" disabled><?PHP echo $data_super['tanggapan_pelayanan'];?></textarea>
+										<?PHP } else if ($data_super['status_pelayanan']=="Tidak Ada"){?>
+											<label class="control-label"> Tanggapan</label>
+											<span class='label label-info'>Tidak Ada</span>
+										<?PHP } ?>
+                                    </div>
+								</div>
+								
+								<div class="col-md-4">
+									<div class="form-group label-floating">
+                                        <label class="control-label"> Tanggapan</label>
+                                        <?PHP if ($data_super['status_umum']=="Belum"){?>
+											<label class="control-label"> Tanggapan</label>
+											<span class='label label-danger'>Belum</span>
+										<?PHP } else if ($data_super['status_umum']=="Sudah"){?>
+											<?PHP
+												$id_uumum = $data_super['user_umum'];
+												$qu_user_umum = mysql_query ("SELECT nama_user FROM user WHERE id_user='$id_uumum'")or die(mysql_error());
+												$data_user_umum = mysql_fetch_array($qu_user_umum);
+											?>
+											<label class="control-label"> Tanggapan (<?PHP echo $data_user_umum['nama_user'];?>)</label>
+											<textarea class="form-control" rows="3" disabled><?PHP echo $data_super['tanggapan_umum'];?></textarea>
+										<?PHP } else if ($data_super['status_umum']=="Tidak Ada"){?>
+											<label class="control-label"> Tanggapan</label>
+											<span class='label label-info'>Tidak Ada</span>
+										<?PHP } ?>
+                                    </div>
+								</div>
+							
+							</div>
+							
                             
-                            <button type="submit" name="btn_update" id="btn_update" class="btn btn-primary">Update</button>
+                            <button type="submit" name="btn_update" id="btn_update" class="btn btn-success">Update</button>
 							 <button type="submit" name="btn_delete" id="btn_delete" class="btn btn-danger">Delete</button>
                             <div class="clearfix"></div>
                         

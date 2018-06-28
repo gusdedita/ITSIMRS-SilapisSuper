@@ -208,5 +208,67 @@
 		} else {
 			header("location:index.php?view=supervisi-data&msg=superdel-fail");
 		}
+		
+	} else if (isset($_POST['btn_save_tmedis'])) {
+		
+		$tang_id 	= $_POST['txt_idsuper'];
+		$tang_user  = $_POST['txt_iduser']; 
+		$tang_medis = $_POST['txt_tang_medis'];
+		
+		$qu_tang_medis = "UPDATE supervisi_masalah SET 
+							tanggapan_medis='$tang_medis',
+							user_medis='$tang_user',
+							status_medis='Sudah'
+						WHERE
+							id_supervisi='$tang_id'
+						";
+		$sql_tang_medis = mysql_query ($qu_tang_medis) or die (mysql_error());
+		if ($sql_tang_medis) {
+			header("location:index.php?view=supervisi-data-masalah&msg=tang-suc");
+		} else {
+			header("location:index.php?view=supervisi-data-masalah&msg=tang-fail");
+		}
+		
+	
+	} else if (isset($_POST['btn_save_tpelayanan'])) {
+	
+		$tang_id 	= $_POST['txt_idsuper'];
+		$tang_user  = $_POST['txt_iduser']; 
+		$tang_pelayanan = $_POST['txt_tang_pelayanan'];
+		
+		$qu_tang_pelayanan = "UPDATE supervisi_masalah SET 
+								tanggapan_pelayanan='$tang_pelayanan',
+								user_pelayanan='$tang_user',
+								status_pelayanan='Sudah'
+							WHERE
+								id_supervisi='$tang_id'
+							";
+		$sql_tang_pelayanan = mysql_query ($qu_tang_pelayanan) or die (mysql_error());
+		if ($sql_tang_pelayanan) {
+			header("location:index.php?view=supervisi-data-masalah&msg=tang-suc");
+		} else {
+			header("location:index.php?view=supervisi-data-masalah&msg=tang-fail");
+		}
+		
+	} else if (isset($_POST['btn_save_tumum'])) {
+	
+		$tang_id 	= $_POST['txt_idsuper'];
+		$tang_user  = $_POST['txt_iduser']; 
+		$tang_umum = $_POST['txt_tang_umum'];
+		
+		$qu_tang_umum = "UPDATE supervisi_masalah SET 
+							tanggapan_umum='$tang_umum',
+							user_umum='$tang_user',
+							status_umum='Sudah'
+						WHERE
+							id_supervisi='$tang_id'
+						";
+		$sql_tang_umum = mysql_query ($qu_tang_umum) or die (mysql_error());
+		if ($sql_tang_umum) {
+			header("location:index.php?view=supervisi-data-masalah&msg=tang-suc");
+		} else {
+			header("location:index.php?view=supervisi-data-masalah&msg=tang-fail");
+		}
+	
 	}
 ?>
