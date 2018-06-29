@@ -34,6 +34,10 @@
 	<!--Datatables-->
 	<link href="assets/css/datatables/dataTables.bootstrap.min.css" rel="stylesheet"></link>
 	
+	<!--   Core JS Files   -->
+	<script src="assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="assets/js/material.min.js" type="text/javascript"></script>
 	
 </head>
 
@@ -59,17 +63,19 @@
 			?>
         </div>
     </div>
+	
 </body>
-<!--   Core JS Files   -->
-<script src="assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
-<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/js/material.min.js" type="text/javascript"></script>
+
+
+
+
+
 
 <script src="assets/js/chartist.min.js"></script>
 <script src="assets/js/arrive.min.js"></script>
 <script src="assets/js/perfect-scrollbar.jquery.min.js"></script>
 <script src="assets/js/bootstrap-notify.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>-->
 <script src="assets/js/material-dashboard.js?v=1.2.0"></script>
 <script src="assets/js/demo.js"></script>
 <script type="text/javascript">
@@ -79,10 +85,11 @@
 </script>
 
 
+
 <!--Select 2-->
 <!--<script src="assets/select2/dist/jquery-2.1.4.min.js"></script>
 <script src="assets/select2/dist/js/select2.min.js"></script>-->
-<script>
+<!--<script>
 	$(document).ready(function () {
 		$("#cb_unit").select2({
 			placeholder: "Nama Unit/Ruangan"
@@ -92,7 +99,7 @@
 			placeholder: "Nama Unit/Ruangan"
 		});	
 	});
-</script>
+</script>-->
 
 <!--Autocomplete-->
 <script src="assets/jquery/aku/jquery.min.js"></script>
@@ -124,7 +131,6 @@
 	  $("#txt_unit_data").autocomplete({
 		source: [
 			<?PHP
-			
 				$query_unit  = "SELECT * FROM unit WHERE status_del='N' ";
 				$result_unit = mysql_query($query_unit) or die(mysql_error());
 				while ($rows_unit = mysql_fetch_object($result_unit)) {
@@ -132,7 +138,6 @@
 					$unit 	= $rows_unit -> nama_unit;
 					echo '"'.$unit.'",';
 				}
-				
 			?>
 		  
 		  "-"
@@ -176,6 +181,9 @@
 				{ 	
 					"className"	:	'details-control',
 					"data"		:   "nama_user"
+				},
+				{ 	
+					"data"		:   "cetak"
 				}
 			]
 		} );
@@ -198,5 +206,9 @@
 	} );
 	
 </script>
+
+
+
+
 
 </html>

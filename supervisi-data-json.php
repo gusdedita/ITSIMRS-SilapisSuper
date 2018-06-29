@@ -21,6 +21,9 @@
 		$query_sel_detsuper  = "SELECT 
 									sp.id_supervisi,
 									sp.nama_unit,
+									(sp.jum_umum + sp.jum_umum_iii + sp.jum_umum_ii + sp.jum_umum_i + sp.jum_jkn + sp.jum_jkn_iii + sp.jum_jkn_ii + sp.jum_jkn_i) AS bed_isi,
+									(sp.rujuk_umum + sp.rujuk_jkn) AS jum_rujuk,
+									(sp.meninggal_umum + sp.meninggal_jkn) AS jum_meninggal,
 									sm.status_medis,
 									sm.status_pelayanan,
 									sm.status_umum
@@ -61,18 +64,23 @@
 			$result_detsuper[] = array(
 				'id_supervisi'		=> $data_sel_detsuper->id_supervisi,
 				'nama_unit' 		=> $data_sel_detsuper->nama_unit,
+				'bed_isi'			=> $data_sel_detsuper->bed_isi,
+				'jum_rujuk'			=> $data_sel_detsuper->jum_rujuk,
+				'jum_meninggal'		=> $data_sel_detsuper->jum_meninggal,
 				'status_medis'		=> $s_medis,
 				'status_pelayanan'	=> $s_pelayanan,
 				'status_umum'		=> $s_umum
 			);
 		}
 		
+		$cetak = "<a href='?view=supervisi-cetak&tgl=$tglsuper&jadwal=$jadwalsuper' class='btn-sm btn-info'>Cetak</a>";
 		$results[] = array(
 			'no' 	   	  	  => $no,
 			'tgl_supervisi'   => $tglsuper,
 			'jadwal_supervisi'=> $jadwalsuper,
 			'detail_super'	  => $result_detsuper,
-			'nama_user'		  => $data_sel_super->nama_user
+			'nama_user'		  => $data_sel_super->nama_user,
+			'cetak'			  => $cetak
 		);
 		$no++;
 	}

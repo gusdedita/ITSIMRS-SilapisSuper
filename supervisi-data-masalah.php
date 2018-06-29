@@ -27,17 +27,30 @@
 									<th rowspan="2">Tgl. Supervisi</th>
 									<th rowspan="2">Jadwal Supervisi</th>
 									<th rowspan="2">Unit</th>
-									<th colspan="2">Medis</th>
-									<th colspan="2">Penunjang Pelayanan</th>
-									<th colspan="2">Adm. Umum</th>
+									<?PHP if ($data_user['otoritas']=="Bid. Medis"){?>
+										<th colspan="2">Medis</th>
+									<?PHP } else if ($data_user['otoritas']=="Bid. Penunjang Pelayanan"){?>
+										<th colspan="2">Penunjang Pelayanan</th>
+									<?PHP } else if ($data_user['otoritas']=="Bid. Adm Umum"){?>
+										<th colspan="2">Adm. Umum</th>
+									<?PHP } else {?>
+										<th colspan="2">Medis</th>
+										<th colspan="2">Penunjang Pelayanan</th>
+										<th colspan="2">Adm. Umum</th>
+									<?PHP } ?>
 								</tr>
 								<tr>
-									<th>Masalah</th>
-									<th>Tanggapan</th>
-									<th>Masalah</th>
-									<th>Tanggapan</th>
-									<th>Masalah</th>
-									<th>Tanggapan</th>
+									<?PHP if ($data_user['otoritas']=="Bid. Medis" || $data_user['otoritas']=="Bid. Penunjang Pelayanan" || $data_user['otoritas']=="Bid. Adm Umum"){?>
+										<th>Masalah</th>
+										<th>Tanggapan</th>
+									<?PHP } else { ?>
+										<th>Masalah</th>
+										<th>Tanggapan</th>
+										<th>Masalah</th>
+										<th>Tanggapan</th>
+										<th>Masalah</th>
+										<th>Tanggapan</th>
+									<?PHP } ?>
 								</tr>
                             </thead>
 							
@@ -69,42 +82,87 @@
 										<td><?PHP echo $data_sel_spmasalah->tgl_supervisi;?></td>
 										<td><?PHP echo $data_sel_spmasalah->jadwal_supervisi;?></td>
 										<td><?PHP echo $data_sel_spmasalah->nama_unit;?></td>
-										<td><?PHP echo $data_sel_spmasalah->masalah_medis;?></td>
-										<td>
-											<?PHP
-												if ($data_sel_spmasalah->status_medis == "Sudah"){
-													echo $data_sel_spmasalah->tanggapan_medis;
-												} else if ($data_sel_spmasalah->status_medis == "Belum"){
-													echo "<a href='' data-toggle='modal' data-target='#myModalTangMedis".$no."'><span class='label label-danger'>Belum</span></a>";
-												} else if ($data_sel_spmasalah->status_medis == "Tidak Ada"){
-													echo "<span class='label label-info'>Tidak Ada</span>";
-												}
-											?>
-										</td>
-										<td><?PHP echo $data_sel_spmasalah->masalah_pelayanan;?></td>
-										<td>
-											<?PHP
-												if ($data_sel_spmasalah->status_pelayanan == "Sudah"){
-													echo $data_sel_spmasalah->tanggapan_pelayanan;
-												} else if ($data_sel_spmasalah->status_pelayanan == "Belum"){
-													echo "<a href='' data-toggle='modal' data-target='#myModalTangPelayanan".$no."'><span class='label label-danger'>Belum</span></a>";
-												} else if ($data_sel_spmasalah->status_pelayanan == "Tidak Ada"){
-													echo "<span class='label label-info'>Tidak Ada</span>";
-												}
-											?>
-										</td>
-										<td><?PHP echo $data_sel_spmasalah->masalah_umum;?></td>
-										<td>
-											<?PHP
-												if ($data_sel_spmasalah->status_umum == "Sudah"){
-													echo $data_sel_spmasalah->tanggapan_umum;
-												} else if ($data_sel_spmasalah->status_umum == "Belum"){
-													echo "<a href='' data-toggle='modal' data-target='#myModalTangUmum".$no."'><span class='label label-danger'>Belum</span></a>";
-												} else if ($data_sel_spmasalah->status_umum == "Tidak Ada"){
-													echo "<span class='label label-info'>Tidak Ada</span>";
-												}
-											?>
-										</td>
+										
+										<?PHP if ($data_user['otoritas']=="Bid. Medis"){?>
+											<td><?PHP echo $data_sel_spmasalah->masalah_medis;?></td>
+											<td>
+												<?PHP
+													if ($data_sel_spmasalah->status_medis == "Sudah"){
+														echo $data_sel_spmasalah->tanggapan_medis;
+													} else if ($data_sel_spmasalah->status_medis == "Belum"){
+														echo "<a href='' data-toggle='modal' data-target='#myModalTangMedis".$no."'><span class='label label-danger'>Belum</span></a>";
+													} else if ($data_sel_spmasalah->status_medis == "Tidak Ada"){
+														echo "<span class='label label-info'>Tidak Ada</span>";
+													}
+												?>
+											</td>
+										
+										<?PHP } else if ($data_user['otoritas']=="Bid. Penunjang Pelayanan"){?>
+											<td><?PHP echo $data_sel_spmasalah->masalah_pelayanan;?></td>
+											<td>
+												<?PHP
+													if ($data_sel_spmasalah->status_pelayanan == "Sudah"){
+														echo $data_sel_spmasalah->tanggapan_pelayanan;
+													} else if ($data_sel_spmasalah->status_pelayanan == "Belum"){
+														echo "<a href='' data-toggle='modal' data-target='#myModalTangPelayanan".$no."'><span class='label label-danger'>Belum</span></a>";
+													} else if ($data_sel_spmasalah->status_pelayanan == "Tidak Ada"){
+														echo "<span class='label label-info'>Tidak Ada</span>";
+													}
+												?>
+											</td>
+											
+										<?PHP } else if ($data_user['otoritas']=="Bid. Adm Umum"){?>	
+											<td><?PHP echo $data_sel_spmasalah->masalah_umum;?></td>
+											<td>
+												<?PHP
+													if ($data_sel_spmasalah->status_umum == "Sudah"){
+														echo $data_sel_spmasalah->tanggapan_umum;
+													} else if ($data_sel_spmasalah->status_umum == "Belum"){
+														echo "<a href='' data-toggle='modal' data-target='#myModalTangUmum".$no."'><span class='label label-danger'>Belum</span></a>";
+													} else if ($data_sel_spmasalah->status_umum == "Tidak Ada"){
+														echo "<span class='label label-info'>Tidak Ada</span>";
+													}
+												?>
+											</td>
+										
+										<?PHP } else { ?>
+											<td><?PHP echo $data_sel_spmasalah->masalah_medis;?></td>
+											<td>
+												<?PHP
+													if ($data_sel_spmasalah->status_medis == "Sudah"){
+														echo $data_sel_spmasalah->tanggapan_medis;
+													} else if ($data_sel_spmasalah->status_medis == "Belum"){
+														echo "<a href='' data-toggle='modal' data-target='#myModalTangMedis".$no."'><span class='label label-danger'>Belum</span></a>";
+													} else if ($data_sel_spmasalah->status_medis == "Tidak Ada"){
+														echo "<span class='label label-info'>Tidak Ada</span>";
+													}
+												?>
+											</td>
+											<td><?PHP echo $data_sel_spmasalah->masalah_pelayanan;?></td>
+											<td>
+												<?PHP
+													if ($data_sel_spmasalah->status_pelayanan == "Sudah"){
+														echo $data_sel_spmasalah->tanggapan_pelayanan;
+													} else if ($data_sel_spmasalah->status_pelayanan == "Belum"){
+														echo "<a href='' data-toggle='modal' data-target='#myModalTangPelayanan".$no."'><span class='label label-danger'>Belum</span></a>";
+													} else if ($data_sel_spmasalah->status_pelayanan == "Tidak Ada"){
+														echo "<span class='label label-info'>Tidak Ada</span>";
+													}
+												?>
+											</td>
+											<td><?PHP echo $data_sel_spmasalah->masalah_umum;?></td>
+											<td>
+												<?PHP
+													if ($data_sel_spmasalah->status_umum == "Sudah"){
+														echo $data_sel_spmasalah->tanggapan_umum;
+													} else if ($data_sel_spmasalah->status_umum == "Belum"){
+														echo "<a href='' data-toggle='modal' data-target='#myModalTangUmum".$no."'><span class='label label-danger'>Belum</span></a>";
+													} else if ($data_sel_spmasalah->status_umum == "Tidak Ada"){
+														echo "<span class='label label-info'>Tidak Ada</span>";
+													}
+												?>
+											</td>
+										<?PHP }?>
 									</tr>
 									
 									<!--Modal Tanggapan Medis===================================================================================================================================-->

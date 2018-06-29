@@ -9,18 +9,13 @@
 	$idsuper = $tglsupervisi."/".$jadwalsupervisi."/".$unit;
 	
 	$qu_cekdata = mysql_query ("SELECT * FROM supervisi_pasien WHERE id_supervisi='$idsuper'")or die(mysql_error());
+	$data_cekdata  = mysql_fetch_array($qu_cekdata);
 	if (mysql_num_rows($qu_cekdata)>0){
-		echo "Ada Data";
-?>
-
-			<script type="text/javascript">
-				//alert("Sudah ada");
-				//document.getElementById("btn_log_suc").click();
-				$function(){
-					  $('#btn_log_suc').trigger('click');
-					});
-			</script>
-<?PHP
+		header("location:?view=supervisi-data&id=$idsuper");
+	}
+	
+	if ($data_user['otoritas']=="Bid. Medis" || $data_user['otoritas']=="Bid. Penunjang Pelayanan" || $data_user['otoritas']=="Bid. Adm Umum"){
+		header("location:index.php?msg=onlypeg");
 	}
 ?>
 
@@ -34,7 +29,7 @@
 					<div class="card-header" data-background-color="purple">
                         <h4 class="title">
 							Input Data Supervisi
-							<button data-toggle="modal" data-target="#myModalBuatLap" name="btn_log_suc" id="btn_log_suc" >halo</button>
+							
 							<a href="" data-toggle="modal" data-target="#myModalBuatLap" class="btn btn-success pull-right">Atur Ulang Laporan</a>
 						</h4>
 						<p class="category">Ruang : <?PHP echo $unit;?> (<?PHP echo $tglsupervisi;?>)

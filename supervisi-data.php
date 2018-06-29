@@ -1,12 +1,24 @@
 <?PHP 
 	include("configdb.php");
+	
+	$idsuper = $_GET['id'];
+	
+	if ($idsuper!=""){
+?>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.btn_log_suc').click()
+			})
+		</script>
+<?PHP
+	}
 ?>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
 			
 			
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="card">
                   
 					<div class="card-header" data-background-color="purple">
@@ -26,7 +38,8 @@
                                 <th>No</th>
                                 <th>Tgl. Supervisi</th>
                                 <th>Jadwal Supervisi</th>
-                                <th>User</th>
+                                <th>Status Masalah</th>
+								<th>Option</th>
                             </thead>
 							
 							<script>
@@ -39,6 +52,9 @@
 									for (i in d.detail_super) {
 										table +='<tr>'+
 													'<td><a href="?view=supervisi-edit&id='+d.detail_super[i].id_supervisi+'">'+d.detail_super[i].nama_unit+'</a></td>'+
+													'<td align="center">'+d.detail_super[i].bed_isi+'</td>'+
+													'<td align="center">'+d.detail_super[i].jum_rujuk+'</td>'+
+													'<td align="center">'+d.detail_super[i].jum_meninggal+'</td>'+
 													'<td align="center">'+d.detail_super[i].status_medis+'</td>'+
 													'<td align="center">'+d.detail_super[i].status_pelayanan+'</td>'+
 													'<td align="center">'+d.detail_super[i].status_umum+'</td>'+
@@ -50,9 +66,12 @@
 									return '<table class="table table-bordered" style="zoom:90%">'+
 												'<tr>'+
 													'<td>Nama Unit</td>'+
-													'<td align="center">Masalah Medis</td>'+
-													'<td align="center">Masalah Pen. Pelayanan</td>'+
-													'<td align="center">Masalah Adm. Umum</td>'+
+													'<td align="center">Bed Terisi</td>'+
+													'<td align="center">Pasien Dirujuk</td>'+
+													'<td align="center">Pasien Meninggal</td>'+
+													'<td align="center">M. Medis</td>'+
+													'<td align="center">M. Pelayanan</td>'+
+													'<td align="center">M. Umum</td>'+
 												'</tr>'+ table;
 												
 								}
@@ -150,6 +169,48 @@
 				</div>
 				
 			</form> 
+			
+		</div>
+	</div>
+</div>
+
+
+
+<button style="display:none;" data-toggle="modal" data-target="#myModalDuplicateData" class="btn_log_suc" ></button>
+<!--Modal Update Status===================================================================================================================================-->
+<div class="modal fade" id="myModalDuplicateData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width:700px">
+		<div class="modal-content">
+	
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Notifikasi</h4>
+			</div>
+			
+			
+			<div class="modal-body">
+				<?PHP
+					$qu_sel_super   = mysql_query("SELECT * FROM supervisi_pasien AS sp JOIN user AS u ON sp.id_user=u.id_user WHERE id_supervisi='$idsuper'") or die (mysql_error());
+					$data_sel_super = mysql_fetch_array($qu_sel_super);
+				?>
+				<font size="4px">
+					<p align="center">	
+						Data Laporan Supervisi Unit/Ruang <b><?PHP echo $data_sel_super['nama_unit']."(".$data_sel_super['jadwal_supervisi'].")";?></b><br> 
+						Tanggal : <b><?PHP echo $data_sel_super['tgl_supervisi'];?></b> sudah dibuat sebelumnya oleh : <?PHP echo $data_sel_super['nama_user'];?>
+					</p>
+				</font>
+				<hr></hr>
+				<br></br>
+			</div>
+			
+			<div class='modal-footer'>
+				<a href="?view=supervisi-edit&id=<?PHP echo $idsuper;?>"><button class="btn btn-primary btn-fill">Lihat Laporan</button></a>
+				<button data-toggle="modal" data-target="#myModalBuatLap" data-dismiss="modal" class="btn btn-success btn-fill">Buat Laporan Baru</button>
+				<button class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
+				<br>
+			</div>
+				
+			 
 			
 		</div>
 	</div>

@@ -198,7 +198,7 @@
 		
 	} else if (isset($_POST['btn_delete'])) {
 		
-		$qu_delete_sppasein = "DELETE FROM supervisi_pasien WHERE id_supervisi='$idsupervisi'";
+		$qu_delete_sppasien = "DELETE FROM supervisi_pasien WHERE id_supervisi='$idsupervisi'";
 		$qu_delete_spmasalah= "DELETE FROM supervisi_masalah WHERE id_supervisi='$idsupervisi'";
 		
 		$sql_delete_sppasien 	= mysql_query ($qu_delete_sppasien) or die (mysql_error());
