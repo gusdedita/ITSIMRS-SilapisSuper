@@ -18,6 +18,56 @@
 		$tglsuper   = $data_sel_super->tgl_supervisi;
 		$jadwalsuper= $data_sel_super->jadwal_supervisi;
 		
+		$qu_status_masalah = "
+							SELECT 
+								(medis.masbel_medis + pelayanan.masbel_pelayanan + umum.masbel_umum) AS Belum,
+								(mediss.masud_medis + pelayanann.masud_pelayanan + umumm.masud_umum) AS Sudah,
+								(medisss.masti_medis + pelayanannn.masti_pelayanan + umummm.masti_umum) AS TidakAda
+							FROM
+								(SELECT COUNT(*) AS masbel_medis 
+								FROM supervisi_masalah AS sm JOIN supervisi_pasien AS sp ON sm.id_supervisi=sp.id_supervisi  
+								WHERE status_medis='Belum' AND sp.tgl_supervisi='$tglsuper' AND sp.jadwal_supervisi='$jadwalsuper') medis JOIN
+
+								(SELECT COUNT(*) AS masbel_pelayanan 
+								FROM supervisi_masalah AS sm JOIN supervisi_pasien AS sp ON sm.id_supervisi=sp.id_supervisi  
+								WHERE status_pelayanan='Belum' AND sp.tgl_supervisi='$tglsuper' AND sp.jadwal_supervisi='$jadwalsuper') pelayanan JOIN
+
+								(SELECT COUNT(*) AS masbel_umum 
+								FROM supervisi_masalah AS sm JOIN supervisi_pasien AS sp ON sm.id_supervisi=sp.id_supervisi  
+								WHERE status_umum='Belum' AND sp.tgl_supervisi='$tglsuper' AND sp.jadwal_supervisi='$jadwalsuper') umum JOIN
+
+								(SELECT COUNT(*) AS masud_medis 
+								FROM supervisi_masalah AS sm JOIN supervisi_pasien AS sp ON sm.id_supervisi=sp.id_supervisi  
+								WHERE status_medis='Sudah' AND sp.tgl_supervisi='$tglsuper' AND sp.jadwal_supervisi='$jadwalsuper') mediss JOIN
+
+								(SELECT COUNT(*) AS masud_pelayanan 
+								FROM supervisi_masalah AS sm JOIN supervisi_pasien AS sp ON sm.id_supervisi=sp.id_supervisi  
+								WHERE status_pelayanan='Sudah' AND sp.tgl_supervisi='$tglsuper' AND sp.jadwal_supervisi='$jadwalsuper') pelayanann JOIN
+
+								(SELECT COUNT(*) AS masud_umum 
+								FROM supervisi_masalah AS sm JOIN supervisi_pasien AS sp ON sm.id_supervisi=sp.id_supervisi  
+								WHERE status_umum='Sudah' AND sp.tgl_supervisi='$tglsuper' AND sp.jadwal_supervisi='$jadwalsuper') umumm JOIN
+								
+								(SELECT COUNT(*) AS masti_medis 
+								FROM supervisi_masalah AS sm JOIN supervisi_pasien AS sp ON sm.id_supervisi=sp.id_supervisi  
+								WHERE status_medis='Tidak Ada' AND sp.tgl_supervisi='$tglsuper' AND sp.jadwal_supervisi='$jadwalsuper') medisss JOIN
+								
+								(SELECT COUNT(*) AS masti_pelayanan 
+								FROM supervisi_masalah AS sm JOIN supervisi_pasien AS sp ON sm.id_supervisi=sp.id_supervisi  
+								WHERE status_pelayanan='Tidak Ada' AND sp.tgl_supervisi='$tglsuper' AND sp.jadwal_supervisi='$jadwalsuper') pelayanannn JOIN
+								
+								(SELECT COUNT(*) AS masti_umum 
+								FROM supervisi_masalah AS sm JOIN supervisi_pasien AS sp ON sm.id_supervisi=sp.id_supervisi  
+								WHERE status_umum='Tidak Ada' AND sp.tgl_supervisi='$tglsuper' AND sp.jadwal_supervisi='$jadwalsuper') umummm
+		
+							";
+		$result_status_masalah = mysql_query($qu_status_masalah) or die(mysql_error());
+		$data_status_masalah   = mysql_fetch_array($result_status_masalah);
+		$totbelum = "<span class='label label-danger'>".$data_status_masalah['Belum']." Belum</span>";
+		$totsudah = "<span class='label label-warning'>".$data_status_masalah['Sudah']." Sudah</span>";
+		$tottidak = "<span class='label label-success'>".$data_status_masalah['TidakAda']." Tidak Ada</span>";
+		$totgabung = $totbelum." ".$totsudah." ".$tottidak;
+		
 		$query_sel_detsuper  = "SELECT 
 									sp.id_supervisi,
 									sp.nama_unit,
@@ -80,6 +130,7 @@
 			'jadwal_supervisi'=> $jadwalsuper,
 			'detail_super'	  => $result_detsuper,
 			'nama_user'		  => $data_sel_super->nama_user,
+			'totstatus'		  => $totgabung,
 			'cetak'			  => $cetak
 		);
 		$no++;

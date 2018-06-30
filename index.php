@@ -179,11 +179,12 @@
 					"data"		:   "jadwal_supervisi" 
 				},
 				{ 	
-					"className"	:	'details-control',
-					"data"		:   "nama_user"
+					"className"	:	'details-control text-center',
+					"data"		:   "totstatus"
 				},
 				{ 	
-					"data"		:   "cetak"
+					"data"		:   "cetak",
+					"className" :	"text-center"
 				}
 			]
 		} );
