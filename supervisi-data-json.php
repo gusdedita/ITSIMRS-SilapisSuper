@@ -123,7 +123,7 @@
 			);
 		}
 		
-		$cetak = "<a href='?view=supervisi-cetak&tgl=$tglsuper&jadwal=$jadwalsuper' class='btn-sm btn-info'>Cetak</a>";
+		$cetak = "<a href='supervisi-laporan.php?tanggal=$tglsuper&jadwal=$jadwalsuper' class='btn-sm btn-info'>Cetak</a>";
 		$results[] = array(
 			'no' 	   	  	  => $no,
 			'tgl_supervisi'   => $tglsuper,
