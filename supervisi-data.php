@@ -31,8 +31,6 @@
                     
 					<div class="card-content table-responsive col-md-12">
 						
-						
-						
                         <table class="table table-bordered" name="tbl_supervisi" id="tbl_supervisi">
                             <thead class="text-primary">
                                 <th>No</th>

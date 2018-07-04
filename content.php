@@ -11,5 +11,7 @@
 	elseif($view == "supervisi-edit") 					include("supervisi-edit.php");
 	elseif($view == "supervisi-data-masalah") 			include("supervisi-data-masalah.php");
 	
+	elseif($view == "user-data") 						include("user-data.php");
+	
 	else echo"No Content";
 ?>

@@ -22,8 +22,8 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
     <link href="assets/css/demo.css" rel="stylesheet" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons" rel='stylesheet'>
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/fontRoboto.css" rel='stylesheet'>
 	
 	<!--  CSS select 2 combo box    -->
 	<link href="assets/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
@@ -155,6 +155,7 @@
 <script src="assets/js/datatables/dataTables.bootstrap.min.js"></script>
 <script>
 	$('#tbl_spmasalah').dataTable();
+	$('#tbl_user').dataTable();
 </script>
 
 <script>

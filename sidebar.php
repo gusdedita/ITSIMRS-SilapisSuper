@@ -27,14 +27,14 @@
                     </li>
 					
                     <li>
-                        <a href="./user.html">
+                        <a href="?view=user-data">
                             <i class="material-icons">person</i>
                             <p>Data Pengguna</p>
                         </a>
                     </li>
                    
                     <li>
-                        <a href="./typography.html">
+                        <a href="?view=unit-data">
                             <i class="material-icons">library_books</i>
                             <p>Data Unit/Ruang</p>
                         </a>
