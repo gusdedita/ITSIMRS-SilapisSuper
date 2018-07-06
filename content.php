@@ -13,5 +13,7 @@
 	
 	elseif($view == "user-data") 						include("user-data.php");
 	
+	elseif($view == "unit-data") 						include("unit-data.php");
+	
 	else echo"No Content";
 ?>

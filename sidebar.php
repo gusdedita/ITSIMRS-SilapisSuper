@@ -26,6 +26,13 @@
                         </a>
                     </li>
 					
+					<li>
+                        <a href="?view=supervisi-data-masalah">
+                            <i class="material-icons">content_paste</i>
+                            <p>Daftar Masalah Supervisi</p>
+                        </a>
+                    </li>
+					
                     <li>
                         <a href="?view=user-data">
                             <i class="material-icons">person</i>
@@ -39,24 +46,7 @@
                             <p>Data Unit/Ruang</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="./icons.html">
-                            <i class="material-icons">bubble_chart</i>
-                            <p>Icons</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./maps.html">
-                            <i class="material-icons">location_on</i>
-                            <p>Maps</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./notifications.html">
-                            <i class="material-icons text-gray">notifications</i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>
+					
                     <li class="active-pro">
                         <a href="upgrade.html">
                             <i class="material-icons">unarchive</i>

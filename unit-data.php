@@ -25,90 +25,78 @@
                                 <th>No</th>
                                 <th>Nama Unit</th>
                                 <th>Type</th>
-                                <th>Kapasitas(Brigging)</th>
+                                <th>Kapasitas</th>
+								<th>Action</th>
                             </thead>
 							
 							<tbody>
 								<?PHP 
-									$no_seluser=1;
-									$qu_seluser = mysql_query("SELECT * FROM user WHERE status_active='Active'")or die(mysql_error());
-									while ($data_seluser = mysql_fetch_object($qu_seluser)){
+									$no_selunit=1;
+									$qu_selunit = mysql_query("SELECT * FROM unit WHERE status_del='N'")or die(mysql_error());
+									while ($data_selunit = mysql_fetch_object($qu_selunit)){
 								?>
 								
 								<tr>
-									<td><?PHP echo $no_seluser;?></td>
-									<td><?PHP echo $data_seluser->nama_user;?></td>
-									<td><?PHP echo $data_seluser->username;?></td>
-									<td><?PHP echo $data_seluser->nip;?></td>
-									<td><?PHP echo $data_seluser->otoritas;?></td>
-									<td><?PHP echo $data_seluser->jabatan;?></td>
+									<td><?PHP echo $no_selunit;?></td>
+									<td><?PHP echo $data_selunit->nama_unit;?></td>
+									<td><?PHP echo $data_selunit->jenis_unit;?></td>
+									<td><?PHP echo $data_selunit->kapasitas;?></td>
 									<td>
-										<a href="" class="btn-sm btn-info" data-toggle="modal" data-target="#myModalEditUser<?PHP echo $no_seluser;?>">Edit</a>
+										<a href="" class="btn-sm btn-info" data-toggle="modal" data-target="#myModalEditUnit<?PHP echo $no_selunit;?>">Edit</a>
 									</td>
 								</tr>
 								
 												<!--Modal Edit User===================================================================================================================================-->
-												<div class="modal fade" id="myModalEditUser<?PHP echo $no_seluser;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												<div class="modal fade" id="myModalEditUnit<?PHP echo $no_selunit;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 													<div class="modal-dialog" role="document" style="width:700px">
 														<div class="modal-content">
 													
 															<div class="modal-header">
 																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<h4 class="modal-title" id="myModalLabel">Edit Data Pengguna</h4>
+																<h4 class="modal-title" id="myModalLabel">Edit Data Unit Ruangan</h4>
 															</div>
 															
-															<form method="post" action="user-action.php" enctype="multipart/form-data" >
+															<form method="post" action="unit-action.php" enctype="multipart/form-data" >
 																
-																<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_seluser->id_user;?>">
+																<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_user['id_user'];?>">
+																<input type="hidden" class="form-control" name="txt_idunit" id="txt_idunit" value="<?PHP echo $data_selunit->id_unit;?>">
+																
 																<div class="modal-body">
 																
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">Nama User</label>
-																		<input type="text" class="form-control" name="txt_namauser" id="txt_namauser" value="<?PHP echo $data_seluser->nama_user;?>">
+																	<div class="col-md-6">
+																		<div class="form-group">
+																			<label class="control-label">Nama Unit/Ruangan</label>
+																			<input type="text" class="form-control" name="txt_namaunit" id="txt_namaunit" value="<?PHP echo $data_selunit->nama_unit;?>">
+																		</div>
 																	</div>
-																</div>
-															
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">NIP</label>
-																		<input type="number" class="form-control" name="txt_nip" id="txt_nip" value="<?PHP echo $data_seluser->nip;?>">
+																	
+																	<div class="col-md-6">
+																		<div class="form-group">
+																			<label class="control-label">Type</label>
+																			<select class="form-control js-example-responsive" id="cb_type" name="cb_type">
+																				<option value=""></option>
+																				<option value="Kelas" <?PHP if ($data_selunit->jenis_unit == "Kelas"){echo "selected";}?>>Kelas</option>
+																				<option value="Non Kelas" <?PHP if ($data_selunit->jenis_unit == "Non Kelas"){echo "selected";}?>>Non Kelas</option>
+																			</select>
+																		</div>
 																	</div>
-																</div>
 																
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">Username</label>
-																		<input type="text" class="form-control" id="txt_username" name="txt_username" value="<?PHP echo $data_seluser->username;?>">
+																	<div class="col-md-6">
+																		<div class="form-group">
+																			<label class="control-label">Kapasitas</label>
+																			<input type="number" class="form-control" name="txt_kapasitas" id="txt_kapasitas" value="<?PHP echo $data_selunit->kapasitas;?>">
+																		</div>
 																	</div>
-																</div>
+																	
+																	<div class="col-md-6">
+																		<div class="form-group">
+																			<label class="control-label" style="color:#ffffff">Kapasitas</label>
+																			<br></br>
+																			<span style="color:#ffffff">-</span>
+																			<br>
+																		</div>
+																	</div>
 																
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">Password</label>
-																		<input type="password" class="form-control" id="txt_password" name="txt_password" value="<?PHP echo $data_seluser->password;?>">
-																	</div>
-																</div>
-																
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">Otoritas</label>
-																		<select class="form-control js-example-responsive" id="cb_otoritas" name="cb_otoritas">
-																			<option value=""></option>
-																			<option value="Pegawai" <?PHP if ($data_seluser->otoritas == "Pegawai"){echo "selected";}?>>Pegawai</option>
-																			<option value="Bid. Medis" <?PHP if ($data_seluser->otoritas == "Bid. Medis"){echo "selected";}?>>Bid. Medis</option>
-																			<option value="Bid. Penunjang Pelayanan" <?PHP if ($data_seluser->otoritas == "Bid. Penunjang Pelayanan"){echo "selected";}?>>Bid. Penunjang Pelayanan</option>
-																			<option value="Bid. Adm Umum" <?PHP if ($data_seluser->otoritas == "Bid. Adm Umum"){echo "selected";}?>>Bid. Adm Umum</option>
-																		</select>
-																	</div>
-																</div>
-																
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">Jabatan</label>
-																		<input type="text" class="form-control" id="txt_jabatan" name="txt_jabatan" value="<?PHP echo $data_seluser->jabatan;?>">
-																	</div>
-																</div>
 																</div>
 																
 																<div class='modal-footer'>
@@ -116,6 +104,7 @@
 																	<button type="submit" class="btn btn-success btn-fill" name="btn_update" id ="btn_update">Update</button>
 																	<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 																</div>
+																
 																
 															</form> 
 															
@@ -125,7 +114,7 @@
 								
 								
 								<?PHP
-										$no_seluser++;
+										$no_selunit++;
 									}
 								?>
 							
@@ -145,74 +134,53 @@
 
 
 <!--Modal Tambah User===================================================================================================================================-->
-<div class="modal fade" id="myModalAddUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModalAddUnit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document" style="width:700px">
 		<div class="modal-content">
 	
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Buat Pengguna</h4>
+				<h4 class="modal-title" id="myModalLabel">Tambah Data Unit/Ruangan</h4>
 			</div>
 			
-			<form method="post" action="user-action.php"  enctype="multipart/form-data" >
-				
-				<?PHP
-					$qu_cekid_user   = mysql_query("SELECT COUNT(*) FROM user");
-					$jum_user = mysql_result($qu_cekid_user, 0);
-					$iduser   = $jum_user+1;
-					$iduser_baru = "USR-".$iduser;
-				?>
+			<form method="post" action="unit-action.php" enctype="multipart/form-data" >
 			
+				<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_user['id_user'];?>">
 				<div class="modal-body">
-				
-				<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $iduser_baru;?>">
-				<div class="col-md-6">
-                    <div class="form-group">
-						<label class="control-label">Nama User</label>
-						<input type="text" class="form-control" name="txt_namauser" id="txt_namauser">
-					</div>
-                </div>
 			
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">NIP</label>
-						<input type="number" class="form-control" name="txt_nip" id="txt_nip">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Nama Unit/Ruangan</label>
+							<input type="text" class="form-control" name="txt_namaunit" id="txt_namaunit" >
+						</div>
 					</div>
-                </div>
-				
-				<div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Username</label>
-						<input type="text" class="form-control" id="txt_username" name="txt_username" >
+					
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Type</label>
+							<select class="form-control js-example-responsive" id="cb_type" name="cb_type">
+								<option value=""></option>
+								<option value="Kelas" >Kelas</option>
+								<option value="Non Kelas" >Non Kelas</option>
+							</select>
+						</div>
 					</div>
-                </div>
-				
-				<div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Password</label>
-						<input type="password" class="form-control" id="txt_password" name="txt_password" >
+					
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Kapasitas</label>
+							<input type="number" class="form-control" name="txt_kapasitas" id="txt_kapasitas" >
+						</div>
 					</div>
-                </div>
-				
-				<div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Otoritas</label>
-						<select class="form-control js-example-responsive" id="cb_otoritas" name="cb_otoritas">
-							<option value=""></option>
-							<option value="Pegawai">Pegawai</option>
-							<option value="Bid. Medis">Bid. Medis</option>
-							<option value="Bid. Penunjang Pelayanan">Bid. Penunjang Pelayanan</option>
-							<option value="Bid. Adm Umum">Bid. Adm Umum</option>
-						</select>
+					
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label" style="color:#ffffff">Kapasitas</label>
+							<br></br>
+							<span style="color:#ffffff">-</span>
+							<br>
+						</div>
 					</div>
-                </div>
-				
-				<div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Jabatan</label>
-						<input type="text" class="form-control" id="txt_jabatan" name="txt_jabatan" >
-					</div>
-                </div>
 				</div>
 				
 				<div class='modal-footer'>
@@ -221,7 +189,6 @@
 				</div>
 				
 			</form> 
-			
 		</div>
 	</div>
 </div>
