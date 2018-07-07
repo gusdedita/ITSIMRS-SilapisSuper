@@ -177,52 +177,67 @@
 												
 												<form method="post" action="supervisi-action.php"  enctype="multipart/form-data" >
 													
-													<input type="hidden" name="txt_idsuper" id="txt_idsuper" value="<?PHP echo $data_sel_spmasalah->id_supervisi;?>"></input>
-													<input type="hidden" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_user['id_user'];?>"></input>
 													
-													<div class="modal-body">
 													
-														<div class="col-md-4">
-															<div class="form-group">
-																<label class="control-label">Unit</label>
-																<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->nama_unit;?>" disabled></input>
-															</div>
-														</div>
+														<?PHP
+															if ($data_user['otoritas'] == "Bid. Medis" || $data_user['otoritas'] == "Admin") {
+														?>
+																<input type="hidden" name="txt_idsuper" id="txt_idsuper" value="<?PHP echo $data_sel_spmasalah->id_supervisi;?>"></input>
+																<input type="hidden" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_user['id_user'];?>"></input>
+																
+																<div class="modal-body">
+																	<div class="col-md-4">
+																		<div class="form-group">
+																			<label class="control-label">Unit</label>
+																			<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->nama_unit;?>" disabled></input>
+																		</div>
+																	</div>
+																	
+																	<div class="col-md-4">
+																		<div class="form-group">
+																			<label class="control-label">Tgl. Laporan</label>
+																			<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->tgl_supervisi;?>" disabled></input>
+																		</div>
+																	</div>
+																	
+																	<div class="col-md-4">
+																		<div class="form-group">
+																			<label class="control-label">Jadwal Supervisi</label>
+																			<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->jadwal_supervisi;?>" disabled></input>
+																		</div>
+																	</div>
+																	
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label class="control-label">Masalah Medis</label>
+																			<textarea class="form-control" rows="3" disabled><?PHP echo $data_sel_spmasalah->masalah_medis;?></textarea>
+																		</div>
+																	</div>
+																
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label class="control-label">Tanggapan Yang Diberikan</label>
+																			<textarea class="form-control" rows="3" name="txt_tang_medis" id="txt_tang_medis"></textarea>
+																		</div>
+																	</div>
+																	
+																<div class='modal-footer'>
+																	<button type="submit" class="btn btn-success btn-fill" name="btn_save_tmedis" id ="btn_save_tmedis">Simpan Tanggapan</button>
+																	<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
+																</div>
+																
+														<?PHP } else { ?>
+																
+																<div class="modal-body">
+																	<p>Mohon Maaf Anda tidak mempunyai otoritas untuk menganggapi <br><b>Masalah Bid. Pelayanan Medis</b></p>
+																</div>
+																
+																<div class='modal-footer'>
+																	<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
+																</div>
+														<?PHP }?>
 														
-														<div class="col-md-4">
-															<div class="form-group">
-																<label class="control-label">Tgl. Laporan</label>
-																<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->tgl_supervisi;?>" disabled></input>
-															</div>
-														</div>
 														
-														<div class="col-md-4">
-															<div class="form-group">
-																<label class="control-label">Jadwal Supervisi</label>
-																<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->jadwal_supervisi;?>" disabled></input>
-															</div>
-														</div>
-														
-														<div class="col-md-12">
-															<div class="form-group">
-																<label class="control-label">Masalah Medis</label>
-																<textarea class="form-control" rows="3" disabled><?PHP echo $data_sel_spmasalah->masalah_medis;?></textarea>
-															</div>
-														</div>
-													
-														<div class="col-md-12">
-															<div class="form-group">
-																<label class="control-label">Tanggapan Yang Diberikan</label>
-																<textarea class="form-control" rows="3" name="txt_tang_medis" id="txt_tang_medis"></textarea>
-															</div>
-														</div>
-														
-														<div class='modal-footer'>
-															<button type="submit" class="btn btn-success btn-fill" name="btn_save_tmedis" id ="btn_save_tmedis">Simpan Tanggapan</button>
-															<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
-														</div>
-														
-													</div>
 												</form> 
 												
 											</div>
@@ -243,6 +258,10 @@
 												</div>
 												
 												<form method="post" action="supervisi-action.php"  enctype="multipart/form-data" >
+													
+													<?PHP
+														if ($data_user['otoritas'] == "Bid. Penunjang Pelayanan" || $data_user['otoritas'] == "Admin") {
+													?>
 													
 													<input type="hidden" name="txt_idsuper" id="txt_idsuper" value="<?PHP echo $data_sel_spmasalah->id_supervisi;?>"></input>
 													<input type="hidden" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_user['id_user'];?>"></input>
@@ -283,13 +302,26 @@
 																<textarea class="form-control" rows="3" name="txt_tang_pelayanan" id="txt_tang_pelayanan"></textarea>
 															</div>
 														</div>
+													</div>
 														
-														<div class='modal-footer'>
-															<button type="submit" class="btn btn-success btn-fill" name="btn_save_tpelayanan" id ="btn_save_tpelayanan">Simpan Tanggapan</button>
-															<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
+													<div class='modal-footer'>
+														<button type="submit" class="btn btn-success btn-fill" name="btn_save_tpelayanan" id ="btn_save_tpelayanan">Simpan Tanggapan</button>
+														<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
+													</div>
+													
+													<?PHP } else {?>
+														
+														<div class="modal-body">
+															<p>Mohon Maaf Anda tidak mempunyai otoritas untuk menganggapi <br><b>Masalah Bid. Penunjang Pelayanan</b></p>
 														</div>
 														
-													</div>
+														<div class='modal-footer'>
+															<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
+														</div>
+													
+													<?PHP } ?>
+														
+													
 												</form> 
 												
 											</div>
@@ -316,49 +348,64 @@
 													<input type="hidden" name="txt_idsuper" id="txt_idsuper" value="<?PHP echo $data_sel_spmasalah->id_supervisi;?>"></input>
 													<input type="hidden" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_user['id_user'];?>"></input>
 													
-													<div class="modal-body">
+													<?PHP if ($data_user['otoritas'] == "Bid. Adm Umum" || $data_user['otoritas'] == "Admin") { ?>
 													
-														<div class="col-md-4">
-															<div class="form-group">
-																<label class="control-label">Unit</label>
-																<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->nama_unit;?>" disabled></input>
-															</div>
-														</div>
+														<div class="modal-body">
 														
-														<div class="col-md-4">
-															<div class="form-group">
-																<label class="control-label">Tgl. Laporan</label>
-																<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->tgl_supervisi;?>" disabled></input>
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="control-label">Unit</label>
+																	<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->nama_unit;?>" disabled></input>
+																</div>
 															</div>
-														</div>
+															
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="control-label">Tgl. Laporan</label>
+																	<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->tgl_supervisi;?>" disabled></input>
+																</div>
+															</div>
+															
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="control-label">Jadwal Supervisi</label>
+																	<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->jadwal_supervisi;?>" disabled></input>
+																</div>
+															</div>
+															
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label class="control-label">Masalah Adm. Umum</label>
+																	<textarea class="form-control" rows="3" disabled><?PHP echo $data_sel_spmasalah->masalah_umum;?></textarea>
+																</div>
+															</div>
 														
-														<div class="col-md-4">
-															<div class="form-group">
-																<label class="control-label">Jadwal Supervisi</label>
-																<input type="text" class="form-control" value="<?PHP echo $data_sel_spmasalah->jadwal_supervisi;?>" disabled></input>
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label class="control-label">Tanggapan Yang Diberikan</label>
+																	<textarea class="form-control" rows="3" name="txt_tang_umum" id="txt_tang_umum"></textarea>
+																</div>
 															</div>
+															
 														</div>
-														
-														<div class="col-md-12">
-															<div class="form-group">
-																<label class="control-label">Masalah Adm. Umum</label>
-																<textarea class="form-control" rows="3" disabled><?PHP echo $data_sel_spmasalah->masalah_umum;?></textarea>
-															</div>
-														</div>
-													
-														<div class="col-md-12">
-															<div class="form-group">
-																<label class="control-label">Tanggapan Yang Diberikan</label>
-																<textarea class="form-control" rows="3" name="txt_tang_umum" id="txt_tang_umum"></textarea>
-															</div>
-														</div>
-														
+															
 														<div class='modal-footer'>
 															<button type="submit" class="btn btn-success btn-fill" name="btn_save_tumum" id ="btn_save_tumum">Simpan Tanggapan</button>
 															<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 														</div>
+													
+													<?PHP } else {?>
 														
-													</div>
+														<div class="modal-body">
+															<p>Mohon Maaf Anda tidak mempunyai otoritas untuk menganggapi <br><b>Masalah Bid. Administrasi Umum</b></p>
+														</div>
+														
+														<div class='modal-footer'>
+															<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
+														</div>
+													
+													<?PHP } ?>
+														
 												</form> 
 												
 											</div>

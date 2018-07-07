@@ -18,7 +18,7 @@
 			$super_tanggal = $_GET['tanggal'];
 			$super_jadwal  = $_GET['jadwal'];
 		?>
-		<button align="center" onClick="window.print();"><i class="fa fa-print"></i></button>
+		<button align="center" onClick="window.print();"><i class="material-icons">print</i></button>
 		<table class="table">
 			<tr>
 				<td>

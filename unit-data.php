@@ -57,53 +57,67 @@
 															</div>
 															
 															<form method="post" action="unit-action.php" enctype="multipart/form-data" >
+															
+																<?PHP if ($data_user == "Admin"){?>
 																
-																<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_user['id_user'];?>">
-																<input type="hidden" class="form-control" name="txt_idunit" id="txt_idunit" value="<?PHP echo $data_selunit->id_unit;?>">
-																
-																<div class="modal-body">
-																
-																	<div class="col-md-6">
-																		<div class="form-group">
-																			<label class="control-label">Nama Unit/Ruangan</label>
-																			<input type="text" class="form-control" name="txt_namaunit" id="txt_namaunit" value="<?PHP echo $data_selunit->nama_unit;?>">
+																	<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_user['id_user'];?>">
+																	<input type="hidden" class="form-control" name="txt_idunit" id="txt_idunit" value="<?PHP echo $data_selunit->id_unit;?>">
+																	
+																	<div class="modal-body">
+																	
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Nama Unit/Ruangan</label>
+																				<input type="text" class="form-control" name="txt_namaunit" id="txt_namaunit" value="<?PHP echo $data_selunit->nama_unit;?>">
+																			</div>
 																		</div>
+																		
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Type</label>
+																				<select class="form-control js-example-responsive" id="cb_type" name="cb_type">
+																					<option value=""></option>
+																					<option value="Kelas" <?PHP if ($data_selunit->jenis_unit == "Kelas"){echo "selected";}?>>Kelas</option>
+																					<option value="Non Kelas" <?PHP if ($data_selunit->jenis_unit == "Non Kelas"){echo "selected";}?>>Non Kelas</option>
+																				</select>
+																			</div>
+																		</div>
+																	
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Kapasitas</label>
+																				<input type="number" class="form-control" name="txt_kapasitas" id="txt_kapasitas" value="<?PHP echo $data_selunit->kapasitas;?>">
+																			</div>
+																		</div>
+																		
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label" style="color:#ffffff">Kapasitas</label>
+																				<br></br>
+																				<span style="color:#ffffff">-</span>
+																				<br>
+																			</div>
+																		</div>
+																	
 																	</div>
 																	
-																	<div class="col-md-6">
-																		<div class="form-group">
-																			<label class="control-label">Type</label>
-																			<select class="form-control js-example-responsive" id="cb_type" name="cb_type">
-																				<option value=""></option>
-																				<option value="Kelas" <?PHP if ($data_selunit->jenis_unit == "Kelas"){echo "selected";}?>>Kelas</option>
-																				<option value="Non Kelas" <?PHP if ($data_selunit->jenis_unit == "Non Kelas"){echo "selected";}?>>Non Kelas</option>
-																			</select>
-																		</div>
+																	<div class='modal-footer'>
+																		<button type="submit" class="btn btn-danger btn-fill" name="btn_delete" id ="btn_delete">Delete</button>
+																		<button type="submit" class="btn btn-success btn-fill" name="btn_update" id ="btn_update">Update</button>
+																		<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 																	</div>
 																
-																	<div class="col-md-6">
-																		<div class="form-group">
-																			<label class="control-label">Kapasitas</label>
-																			<input type="number" class="form-control" name="txt_kapasitas" id="txt_kapasitas" value="<?PHP echo $data_selunit->kapasitas;?>">
-																		</div>
+																<?PHP } else {?>
+																	
+																	<div class="modal-body">
+																		<p>Mohon Maaf Anda tidak mempunyai otoritas untuk merubah data ini.</p>
 																	</div>
 																	
-																	<div class="col-md-6">
-																		<div class="form-group">
-																			<label class="control-label" style="color:#ffffff">Kapasitas</label>
-																			<br></br>
-																			<span style="color:#ffffff">-</span>
-																			<br>
-																		</div>
+																	<div class='modal-footer'>
+																		<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 																	</div>
-																
-																</div>
-																
-																<div class='modal-footer'>
-																	<button type="submit" class="btn btn-danger btn-fill" name="btn_delete" id ="btn_delete">Delete</button>
-																	<button type="submit" class="btn btn-success btn-fill" name="btn_update" id ="btn_update">Update</button>
-																	<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
-																</div>
+																	
+																<?PHP }?>
 																
 																
 															</form> 
@@ -144,6 +158,8 @@
 			</div>
 			
 			<form method="post" action="unit-action.php" enctype="multipart/form-data" >
+			
+				<?PHP if ($data_user['otoritas'] == "Admin") {?>
 			
 				<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_user['id_user'];?>">
 				<div class="modal-body">
@@ -187,6 +203,18 @@
 					<button type="submit" class="btn btn-success btn-fill" name="btn_save" id ="btn_save">Simpan</button>
 					<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 				</div>
+				
+				<?PHP } else {?>
+					
+					<div class="modal-body">
+						<p>Mohon Maaf Anda tidak mempunyai otoritas untuk menambahkan data unit/Ruang.</p>
+					</div>
+					
+					<div class='modal-footer'>
+						<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
+					</div>
+					
+				<?PHP }?>
 				
 			</form> 
 		</div>

@@ -2,12 +2,23 @@
 	include("configdb.php");
 	
 	$idsuper = $_GET['id'];
+	$msg     = $_GET['msg'];
 	
 	if ($idsuper!=""){
 ?>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('.btn_log_suc').click()
+			})
+		</script>
+<?PHP
+	} 
+	
+	if ($msg=="notpegawai") {
+?>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.btn_notpegawai').click()
 			})
 		</script>
 <?PHP
@@ -113,58 +124,71 @@
 			</div>
 			
 			<form method="post" action="<?PHP $_SERVER['PHP_SELF']?>"  enctype="multipart/form-data" >
-				<div class="modal-body">
-				
-				<div class="col-md-6">
-                    <div class="form-group">
-						<label class="control-label">Unit</label>
-						<select class="form-control js-example-responsive" id="cb_unit" name="cb_unit">
-							<option value=""></option>
-							<?PHP
-								$query_unit  = "SELECT * FROM unit WHERE status_del='N' ";
-								$result_unit = mysql_query($query_unit) or die(mysql_error());
-								while ($rows_unit = mysql_fetch_object($result_unit)) {
-							?>
-							<option value="<?PHP echo $rows_unit-> nama_unit;?>"><?PHP echo $rows_unit-> nama_unit;?></option>
-							<?PHP
-								}
-							?>
-						</select>
-						<!--<input type="text" class="form-control" id="txt_unit" name="txt_unit">-->
-					</div>
-                </div>
 			
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Tanggal Supervisi</label>
-						<input type="date" class="form-control" name="txt_tgl_supervisi" id="txt_tgl_supervisi">
+				<?PHP if ($data_user['otoritas'] == "Pegawai" || $data_user['otoritas'] == "Admin") {?>
+					<div class="modal-body">
+					
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Unit</label>
+								<select class="form-control js-example-responsive" id="cb_unit" name="cb_unit">
+									<option value=""></option>
+									<?PHP
+										$query_unit  = "SELECT * FROM unit WHERE status_del='N' ";
+										$result_unit = mysql_query($query_unit) or die(mysql_error());
+										while ($rows_unit = mysql_fetch_object($result_unit)) {
+									?>
+									<option value="<?PHP echo $rows_unit-> nama_unit;?>"><?PHP echo $rows_unit-> nama_unit;?></option>
+									<?PHP
+										}
+									?>
+								</select>
+								<!--<input type="text" class="form-control" id="txt_unit" name="txt_unit">-->
+							</div>
+						</div>
+					
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Tanggal Supervisi</label>
+								<input type="date" class="form-control" name="txt_tgl_supervisi" id="txt_tgl_supervisi">
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Waktu (Jam Supervisi)</label>
+								<input type="time" class="form-control" id="txt_jam" name="txt_jam" >
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Jadwal Supervisi</label>
+								<select class="form-control js-example-responsive" id="cb_jadwalsupervisi" name="cb_jadwalsupervisi">
+									<option value=""></option>
+									<option value="Pagi">Jadwal Pagi</option>
+									<option value="Siang">Jadwal Siang</option>
+									<option value="Sore">Jadwal Sore</option>
+								</select>
+							</div>
+						</div>
 					</div>
-                </div>
-				
-				<div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Waktu (Jam Supervisi)</label>
-						<input type="time" class="form-control" id="txt_jam" name="txt_jam" >
+					
+					<div class='modal-footer'>
+						<button type="submit" class="btn btn-success btn-fill" name="btn_buatlaporan" id ="btn_buatlaporan">Input Data Supervisi</button>
+						<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 					</div>
-                </div>
+					
+				<?PHP } else {?>
 				
-				<div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Jadwal Supervisi</label>
-						<select class="form-control js-example-responsive" id="cb_jadwalsupervisi" name="cb_jadwalsupervisi">
-							<option value=""></option>
-							<option value="Pagi">Jadwal Pagi</option>
-							<option value="Siang">Jadwal Siang</option>
-							<option value="Sore">Jadwal Sore</option>
-						</select>
+					<div class="modal-body">
+						<p>Mohon Maaf Anda tidak mempunyai otoritas untuk membuat laporan.</p>
 					</div>
-                </div>
-				</div>
-				
-				<div class='modal-footer'>
-					<button type="submit" class="btn btn-success btn-fill" name="btn_buatlaporan" id ="btn_buatlaporan">Input Data Supervisi</button>
-					<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
-				</div>
+					
+					<div class='modal-footer'>
+						<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
+					</div>
+				<?PHP } ?>
 				
 			</form> 
 			
@@ -204,6 +228,41 @@
 			<div class='modal-footer'>
 				<a href="?view=supervisi-edit&id=<?PHP echo $idsuper;?>"><button class="btn btn-primary btn-fill">Lihat Laporan</button></a>
 				<button data-toggle="modal" data-target="#myModalBuatLap" data-dismiss="modal" class="btn btn-success btn-fill">Buat Laporan Baru</button>
+				<button class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
+				<br>
+			</div>
+				
+			 
+			
+		</div>
+	</div>
+</div>
+
+
+
+<button style="display:none;" data-toggle="modal" data-target="#myModalNotPegawai" class="btn_notpegawai" ></button>
+<!--Modal Update Status===================================================================================================================================-->
+<div class="modal fade" id="myModalNotPegawai" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width:700px">
+		<div class="modal-content">
+	
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Notifikasi</h4>
+			</div>
+			
+			
+			<div class="modal-body">
+				<font size="4px">
+					<p align="center">	
+						Mohon Maaf Anda tidak mempunyai otoritas untuk merubah data laporan supervisi ini.
+					</p>
+				</font>
+				<hr></hr>
+				<br></br>
+			</div>
+			
+			<div class='modal-footer'>
 				<button class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 				<br>
 			</div>

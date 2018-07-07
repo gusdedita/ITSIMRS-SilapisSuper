@@ -62,63 +62,76 @@
 															
 															<form method="post" action="user-action.php" enctype="multipart/form-data" >
 																
-																<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_seluser->id_user;?>">
-																<div class="modal-body">
-																
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">Nama User</label>
-																		<input type="text" class="form-control" name="txt_namauser" id="txt_namauser" value="<?PHP echo $data_seluser->nama_user;?>">
+																<?PHP if ($data_user['otoritas'] == "Admin") { ?>
+																	<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $data_seluser->id_user;?>">
+																	<div class="modal-body">
+																	
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Nama User</label>
+																				<input type="text" class="form-control" name="txt_namauser" id="txt_namauser" value="<?PHP echo $data_seluser->nama_user;?>">
+																			</div>
+																		</div>
+																	
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">NIP</label>
+																				<input type="number" class="form-control" name="txt_nip" id="txt_nip" value="<?PHP echo $data_seluser->nip;?>">
+																			</div>
+																		</div>
+																		
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Username</label>
+																				<input type="text" class="form-control" id="txt_username" name="txt_username" value="<?PHP echo $data_seluser->username;?>">
+																			</div>
+																		</div>
+																		
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Password</label>
+																				<input type="password" class="form-control" id="txt_password" name="txt_password" value="<?PHP echo $data_seluser->password;?>">
+																			</div>
+																		</div>
+																		
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Otoritas</label>
+																				<select class="form-control js-example-responsive" id="cb_otoritas" name="cb_otoritas">
+																					<option value=""></option>
+																					<option value="Pegawai" <?PHP if ($data_seluser->otoritas == "Pegawai"){echo "selected";}?>>Pegawai</option>
+																					<option value="Bid. Medis" <?PHP if ($data_seluser->otoritas == "Bid. Medis"){echo "selected";}?>>Bid. Medis</option>
+																					<option value="Bid. Penunjang Pelayanan" <?PHP if ($data_seluser->otoritas == "Bid. Penunjang Pelayanan"){echo "selected";}?>>Bid. Penunjang Pelayanan</option>
+																					<option value="Bid. Adm Umum" <?PHP if ($data_seluser->otoritas == "Bid. Adm Umum"){echo "selected";}?>>Bid. Adm Umum</option>
+																				</select>
+																			</div>
+																		</div>
+																		
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Jabatan</label>
+																				<input type="text" class="form-control" id="txt_jabatan" name="txt_jabatan" value="<?PHP echo $data_seluser->jabatan;?>">
+																			</div>
+																		</div>
 																	</div>
-																</div>
-															
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">NIP</label>
-																		<input type="number" class="form-control" name="txt_nip" id="txt_nip" value="<?PHP echo $data_seluser->nip;?>">
+																	
+																	<div class='modal-footer'>
+																		<button type="submit" class="btn btn-danger btn-fill" name="btn_delete" id ="btn_delete">Delete</button>
+																		<button type="submit" class="btn btn-success btn-fill" name="btn_update" id ="btn_update">Update</button>
+																		<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 																	</div>
-																</div>
 																
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">Username</label>
-																		<input type="text" class="form-control" id="txt_username" name="txt_username" value="<?PHP echo $data_seluser->username;?>">
+																<?PHP } else { ?>
+																
+																	<div class="modal-body">
+																		<p>Mohon Maaf Anda tidak mempunyai otoritas untuk merubah data pengguna.</p>
 																	</div>
-																</div>
-																
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">Password</label>
-																		<input type="password" class="form-control" id="txt_password" name="txt_password" value="<?PHP echo $data_seluser->password;?>">
+																	
+																	<div class='modal-footer'>
+																		<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 																	</div>
-																</div>
-																
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">Otoritas</label>
-																		<select class="form-control js-example-responsive" id="cb_otoritas" name="cb_otoritas">
-																			<option value=""></option>
-																			<option value="Pegawai" <?PHP if ($data_seluser->otoritas == "Pegawai"){echo "selected";}?>>Pegawai</option>
-																			<option value="Bid. Medis" <?PHP if ($data_seluser->otoritas == "Bid. Medis"){echo "selected";}?>>Bid. Medis</option>
-																			<option value="Bid. Penunjang Pelayanan" <?PHP if ($data_seluser->otoritas == "Bid. Penunjang Pelayanan"){echo "selected";}?>>Bid. Penunjang Pelayanan</option>
-																			<option value="Bid. Adm Umum" <?PHP if ($data_seluser->otoritas == "Bid. Adm Umum"){echo "selected";}?>>Bid. Adm Umum</option>
-																		</select>
-																	</div>
-																</div>
-																
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label class="control-label">Jabatan</label>
-																		<input type="text" class="form-control" id="txt_jabatan" name="txt_jabatan" value="<?PHP echo $data_seluser->jabatan;?>">
-																	</div>
-																</div>
-																</div>
-																
-																<div class='modal-footer'>
-																	<button type="submit" class="btn btn-danger btn-fill" name="btn_delete" id ="btn_delete">Delete</button>
-																	<button type="submit" class="btn btn-success btn-fill" name="btn_update" id ="btn_update">Update</button>
-																	<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
-																</div>
+																	
+																<?PHP } ?>
 																
 															</form> 
 															
@@ -165,63 +178,76 @@
 					$iduser   = $jum_user+1;
 					$iduser_baru = "USR-".$iduser;
 				?>
-			
-				<div class="modal-body">
 				
-				<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $iduser_baru;?>">
-				<div class="col-md-6">
-                    <div class="form-group">
-						<label class="control-label">Nama User</label>
-						<input type="text" class="form-control" name="txt_namauser" id="txt_namauser">
+				<?PHP if ($data_user['otoritas'] == "Admin") {?>
+					<div class="modal-body">
+					
+						<input type="hidden" class="form-control" name="txt_iduser" id="txt_iduser" value="<?PHP echo $iduser_baru;?>">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Nama User</label>
+								<input type="text" class="form-control" name="txt_namauser" id="txt_namauser">
+							</div>
+						</div>
+					
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">NIP</label>
+								<input type="number" class="form-control" name="txt_nip" id="txt_nip">
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Username</label>
+								<input type="text" class="form-control" id="txt_username" name="txt_username" >
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Password</label>
+								<input type="password" class="form-control" id="txt_password" name="txt_password" >
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Otoritas</label>
+								<select class="form-control js-example-responsive" id="cb_otoritas" name="cb_otoritas">
+									<option value=""></option>
+									<option value="Pegawai">Pegawai</option>
+									<option value="Bid. Medis">Bid. Medis</option>
+									<option value="Bid. Penunjang Pelayanan">Bid. Penunjang Pelayanan</option>
+									<option value="Bid. Adm Umum">Bid. Adm Umum</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Jabatan</label>
+								<input type="text" class="form-control" id="txt_jabatan" name="txt_jabatan" >
+							</div>
+						</div>
 					</div>
-                </div>
-			
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">NIP</label>
-						<input type="number" class="form-control" name="txt_nip" id="txt_nip">
+					
+					<div class='modal-footer'>
+						<button type="submit" class="btn btn-success btn-fill" name="btn_save" id ="btn_save">Simpan</button>
+						<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 					</div>
-                </div>
 				
-				<div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Username</label>
-						<input type="text" class="form-control" id="txt_username" name="txt_username" >
-					</div>
-                </div>
+				<?PHP } else { ?>
 				
-				<div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Password</label>
-						<input type="password" class="form-control" id="txt_password" name="txt_password" >
+					<div class="modal-body">
+						<p>Mohon Maaf Anda tidak mempunyai otoritas untuk menambahkan data Pengguna.</p>
 					</div>
-                </div>
 				
-				<div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Otoritas</label>
-						<select class="form-control js-example-responsive" id="cb_otoritas" name="cb_otoritas">
-							<option value=""></option>
-							<option value="Pegawai">Pegawai</option>
-							<option value="Bid. Medis">Bid. Medis</option>
-							<option value="Bid. Penunjang Pelayanan">Bid. Penunjang Pelayanan</option>
-							<option value="Bid. Adm Umum">Bid. Adm Umum</option>
-						</select>
+					<div class='modal-footer'>
+						<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
 					</div>
-                </div>
-				
-				<div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Jabatan</label>
-						<input type="text" class="form-control" id="txt_jabatan" name="txt_jabatan" >
-					</div>
-                </div>
-				</div>
-				
-				<div class='modal-footer'>
-					<button type="submit" class="btn btn-success btn-fill" name="btn_save" id ="btn_save">Simpan</button>
-					<button type="button" class="btn btn-info btn-fill" class="close" data-dismiss="modal">Cancel</button>
-				</div>
+					
+				<?PHP } ?>
 				
 			</form> 
 			

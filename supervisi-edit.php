@@ -11,6 +11,11 @@
 								WHERE 
 									sp.id_supervisi='$idsupervisi'")or die(mysql_error());
 	$data_super = mysql_fetch_array($qu_super);
+	
+	
+	if ($data_user['otoritas'] == "Bid. Medis" || $data_user['otoritas'] == "Bid. Penunjang Pelayanan" || $data_user['otoritas'] == "Bid. Adm Umum"){
+		header("location:?view=supervisi-data&msg=notpegawai");
+	}
 ?>
 <div class="content">
     <div class="container-fluid">
